@@ -1,0 +1,218 @@
+1.javascript is a highly abstructed programming language.
+high abstruction: hiding the implementation details and showing only the functionality to the users.
+             exmple: jemon choto vai ke akta high level er command dicchi."fan char". but details boltesina fan kivabe charte hbe.karon sta vai bujhe nibe.
+             exmple: atm card dia machine theke tk tula.vitorer kono functionality user dekhtesena. just output paitese.
+
+2.high abstruction is js:
+     1.don't have to handle resource management and memory allocation
+     2.don't have to garbage collection(free the memory with the help  of an algorithm mark-and-sweep)
+     3.reduce details so developer can focus on logic better
+     4.improve understandibility as well as maintainability of the code.
+
+3.js is a JIT(just-in-time)-compiled language:
+     *js is not purely interpreted
+     *modern js is jIT compiled
+     *jit compiler converts the entire code into machine code and execute them immediately. 
+
+4.js is a multi paradigm programming language:
+     paradigm:code structure that will determine the style or a way of programming.
+     1.procedural programming:
+     2.object-oriented programming:modelling a system as a collection of object.object contains method and data>
+     3.functional programming:
+
+5.js is a prototyped based programming language:
+    *sob object eri abar akta mother object thke.
+    *everythig in js(object,array,function) is an object.which all are connected internally by  proto-type.
+
+6.js is dynamic typed:
+    *onno programming language bole dia lge konta string,konta number.but js e bolte hoana.
+
+7.how js is run in browser:(v8 engine)
+   *js code ke execute kore v8 engine.(microsoft edge o v8 engine use kortese)
+   *atake banano hoise c++ dia
+   *v8: is google's open source hugh performance and webAssembly engine.
+   **ata js code ke parse kore execute kore.
+
+8.execution context and call stack:
+   *execution context is an environment where code runs.(jemon let dia kono variable ke ami jodi fn er vitore decleare kori and oi var ke fn er baire thk call kori tahole ami error khabo.fn er vitor ta hoile oi var er exxecution context..)
+   *inside the exe con a piece of js code is executed.
+   *variable,parameter and other information related to code are stored in exe con.
+
+   *2 kinds of execution context in js:
+      1.global exxecution context.(sobai excess korte parbe)
+      2.function execution context.(sobai excess korte parbrna)
+
+     *global exe con:
+       *whenver the js engine recieves a script file  it creates a default execution context known as global exe con.
+       *all js code that is not inside a fn gets executed.
+       *for every js file there can be only one gec.
+     *function exe con:
+       *whenever a fn is called, the js engine creates a different type of execution context
+       *every time a fn is called a new fec is created.
+       *each fn has its own execution context.
+       *there can be more than one FEC. 
+     
+     *phases:(execution  context  er duita phase thake)
+       1.creation phase:js engine called a fn but its execution not started
+       2.execution phase:js engine executes the code in this phase.
+
+     *call stack:
+       *aktar por akta fn ke call korte thaka.ba aktafn er vitot arekta fn ke call  kora.
+
+       **fetch,setTimeOut sequencialiy chollena.
+     *js is single-threded but non-blocking:
+     *single threded means only one statement is executed at a time.
+     *js by nature single-threded.
+    
+     *synchronous:sequencialiy chole
+     *asynchronous:sequencialiy cholena
+      function one(){
+      console.log('one');
+      setTimeout(()=>{
+        console.log('two')
+       },2000)
+        console.log('three');
+      }
+      one()
+
+      *promise:
+       *the promise object represent the eventual completion or failure of an asynchronous operation and its resulting value.a promise is one of these three states: pending,resolve,reject
+      example-1:
+      const getData=new Promise((resolve,reject)=>{
+      // resolve(1234)
+      reject('no data found')
+      })
+      getData
+      .then(data=>console.log(data+4))
+      .catch(error=>console.error("error",error));    
+      example-2:
+      const getData=new Promise((resolve,reject)=>{
+    
+        const num=Math.random()*10;
+        console.log(num)
+        if(num<6){
+            resolve('less than')
+        }
+        else{
+            reject('greater than')
+            }
+     })
+    getData
+    .then(data=>console.log(data+'double double'))
+    .catch(error=>console.error("error",error));      
+     
+
+     *fetch dia server er data ke paite request pathano hoa.tarpor server fetch ke akta promise day .jeta amra then ba catch dia dhori.
+      
+      *setTimeOut():akta time por only akbar hobe.
+     *setInterval():
+     *akta time por por bar bar hobe.
+     let num=0;
+     setInterval(()=>{
+     console.log(num++)
+     },1000)
+
+     *stop korte clearInterval, stopTimeOut use hoa(pore vlokore jnte hbe)
+      *++num,num++(baray use koro,use kore barau)
+      let num=0;
+      const intervalId=setInterval(()=>{
+          num++
+          console.log(num);
+      
+      if(num===10){
+          clearInterval(intervalId)
+      }
+      },1000)
+
+---->>>>Exemple:count start,count stop,reset
+      let intervalId;
+function startBtn(){
+    const countStart=document.getElementById('count');
+  
+    let num=0;
+ intervalId=setInterval(()=>{
+        num++;
+        console.log(num);
+        countStart.innerText=num;
+
+
+    },1000);
+    
+}
+function stopBtn(){
+
+    clearInterval(intervalId)
+
+}; 
+function reset(){
+    const countStart=document.getElementById('count');
+    countStart.innerText=0;
+    clearInterval(intervalId);
+}
+
+---->>>>js event loop:
+        aktarpor akta execute houake bujhay.
+        *event loop er jnno js single threded hoileu asynchronously cholte pare. karo event queue ache.
+
+function a(){
+    console.log('a')
+    b();
+    console.log('aaa')
+}
+function b(){
+    console.log('b')
+    c();
+    console.log('bb')
+}
+setTimeout(()=>{
+    console.log('set time out');
+},2000)
+function c(){
+    console.log('c')
+}
+a()
+
+*error handling: try...catch
+*jetate error hoite pare sta nrmally rakhle error hoile code ar niche jabeina,but try...catch er rakhle jetuk error oituk e alert dia porer code run korbe
+
+console.log(1111)
+console.log(bbaria);(error dibe)
+try{
+}
+catch(err){
+    console.log('err:',err);
+}
+console.log(22222)
+
+console.log(1111)
+try{
+    console.log(bbaria);
+}
+catch(err){
+    console.log('err:',err);
+}
+finally{
+    console.log('all done')  (finally er vitor jeta obossoi execute      seta rakha hoa)
+}
+console.log(22222)
+
+
+***manually akta error ke throw kora jay throw dia
+let num=19;
+try{
+    
+    if(num!=18){
+        throw "18 likho"
+    }
+}
+catch(err){
+    console.log('err:',err);
+}
+finally{
+    console.log('all done')
+}
+
+
+*.then():
+The .then() method is a built-in method in JavaScript that is used to handle promises. Promises are a way to manage asynchronous operations in JavaScript. When an asynchronous operation is initiated, a promise is returned immediately. The .then() method is then used to handle the result of the promise once it has been fulfilled or rejected.
+ Overall, the .then() method is used to chain together multiple asynchronous operations that depend on each other,
