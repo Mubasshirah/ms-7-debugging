@@ -1,0 +1,12 @@
+1.Some debugging techniques:
+  a.using console.log()
+  b.setting the breakpoints.
+  c.using the debugger keyword.
+  d.backtracking
+
+2.Common types of errors:
+  a.syntax error: missing inverted comma,parenthasis missing,constt etc
+  b.type error: boolean but slice korte chaua, math.randomme() likha,attepting to access properties of null or undefined,const var e abar value assign korle.
+  c.reference error: not defining a var name, trying to access block-scoped variable outside of their scope.
+  d.js internal error:onk switch case use korle etc
+  e.range error: bisal array banaile 
