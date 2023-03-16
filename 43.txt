@@ -1,0 +1,41 @@
+1.what is accessibility?
+  Accessibility is the practice of making your websites usable by as many people as possible. We traditionally think of this as being about people with disabilities, but the practice of making sites accessible also benefits other groups such as those using mobile devices, or those with slow network connections.
+Building accessible sites benefits everyone:
+ Semantic HTML, which improves accessibility, also improves SEO, making your site more findable.
+  Caring about accessibility demonstrates good ethics and morals, which improves your public image.
+    Other good practices that improve accessibility also make your site more usable by other groups, such as mobile phone users or those on low network speed. In fact, everyone can benefit from many such improvements.
+
+2.hOw to make an accessible website?
+  Choose a content management system that supports accessibility
+  Use headings correctly to organize the structure of your content
+  Include proper alt text for images
+  Give your links unique and descriptive names
+  Use color with care
+  Design your forms for accessibility
+  Use tables for tabular data, not for layout
+  Ensure that all content can be accessed with the keyboard alone in a logical way
+  Use ARIA roles and landmarks (but only when necessary)
+  Make dynamic content accessible
+
+3.console api:
+  console.error()
+  console.count()
+  monitor(fn name)
+  unmonitor(fn name)
+  monitorEvents()
+  unmonitorEvents()
+  console.table()
+
+4.element tab overview:
+ image-3
+
+5.console tab:
+ image-4
+ image-5
+ image-6
+
+6.source tab:
+ image-7
+ image-8
+
+7.

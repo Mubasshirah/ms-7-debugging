@@ -1,0 +1,228 @@
+1.how browser works:
+   html file ke->browser->dom tree banay
+   css sheet ke->browser->style structure baanay
+   then dom tree & style structure ke  milie browser toiri korre->reender tree
+   erpor ultimately amra browser e je display dekhte pai seteke browser  paint korar por dekha jay. (website ta paint korar moto amra visually dekhi)
+
+2.API-a set of protocols and definitions that allows communication between two applications.(data exchange,signal exchange,kono request,order etc agulo sob api er through te hoa)
+
+different types of api:
+web api,browser api,server api,third party api
+categories browser api:
+   1.storage api: give the ability to  store data onthe client side.
+   ->cookies,local storage,session storage,indexed DB
+   2.fetch api: make asynchronous HTTP reuests to  a server.response format can be JSON, plain text or XML
+   3.form data api:
+   4.drag & drop api:helps to implement drag and drop feature and build image upload system. 
+   5.DOM api: allows to manipulate html and css in creating,removing and also dynamically applying new styles to your page.
+   6.geolocation api:helps to find the geographical location of an user.
+   7.canvas api:creation of graphics
+   8.notification api
+   9.history api:
+   10.audio and video api:can manage,display and create different media types.
+
+BOM:1. browser object model.
+    2. used to access and manipulation of the browser window.
+    3.each browser has its own standard for implementing BOM.
+    4.consists of twhe objects navigator,history,screen,location.
+    5.bom is super set of dom.
+
+DOM: 1.document object model
+     2.used to maipulate html document
+     3.represent the contents of the web page
+     4.dom is subset of BOM
+
+Browser alert, confirm, prompt:(three type of pop-up box)
+  *alert brwser api,node e cholena
+  confirm:(yes /no )
+  function showConfirm(){
+  const confimation=  confirm('tk de');
+  
+  if(confimation==true){
+    alert('jaan')
+  }
+  else{
+    alert('vaag')
+  }
+}
+ prompt:
+ function showPrompt(){
+   const name= prompt('name ki?');
+   if(name=='adiba'){
+    alert('welcome')
+   }
+   else{
+    alert('name thik nai')
+   }
+}
+
+Location: 
+   properties:host,domain name,port,pathname,search,hash
+   purotake bole href/url
+
+location redirect to another page:
+location.assign():keep history and add new
+location.replace():replace the current history.
+location.href():current tateu thaka jay,replace o hote pare.
+*location and window.location same
+
+History Api:
+  history.back()
+  history.forword()
+  history.go()(+1/-2 dia samne pichone jaua jay)
+
+cookies: document.cookies()
+  1.data stored  in small text file
+  2.naturally sent by visited website
+  3.sent to users computer through browser
+  4.is not a program,does not perform any function
+  5.stored in key-value pair
+purpose of cookies:
+  1.session management:cookies allow you  to manage any information that the server should remember.like:login,shopping cart
+  2.personalization:store setting,preference,theme for specific user
+  3.tracking:record and analyze users behaviour in advertising.
+parts of cookie: 
+  name,secure flag,path,expiration,value,domain
+types:
+  first party cookie
+  third party cookie (fb te juta search dile,youtube eu jutar add dekhay)  
+  http only cookie
+
+LOcal Storage:(browser api..node e erroe dibe)
+  *khli nijer computer e kichu data store thkbe.jemon kono e-commerce website ami log in na koreu jodi cart e product rakhi.and onk din por abar same computertheke oi websit e e visit kori tahole ami cart e store houa product dekhte pabo.ai kajta local storage kore.
+  *localStorage.getItem('key')
+  *localStorage.setItem('key','value')
+  *localStorage.removeItem()
+  *key ,value duitai string
+
+  1.stores data in browswer without expiration
+  2.stored data through keys/value pair
+  3.never deleted
+  4.can be used in future
+
+->** cookies vws local storage vs session storage:
+     IMAGE-1
+
+  *****browser off korleu local storage er data thke but session storage er data thkena.
+  
+
+localStorage e object and array set korar niom:
+  object:
+  const person={name:'adi',age:30}
+JSON.stringify(person)
+'{"name":"adi","age":30}'
+const personString=JSON.stringify(person)
+JSON.parse(personString)
+{name: 'adi', age: 30}
+const valueget=JSON.parse(personString)
+undefined
+valueget.name
+'adi'
+
+**Shopping Cart e data entry
+html:
+<input id="addProduct" type="text">
+    <input id="addQuantity" type="text">
+    <button onclick="add()">add</button>
+    <ul id="container">
+
+    </ul>
+
+js:
+function add(){
+    const addProduct=document.getElementById('addProduct');
+    const addQuantity=document.getElementById('addQuantity');
+    const productValue=addProduct.value;
+    const quantityValue=addQuantity.value;
+    console.log(productValue,quantityValue);
+    showProduct(productValue,quantityValue);
+    saveProductInLocalStorage(productValue,quantityValue)
+}
+function showProduct(product,quantity){
+    const container=document.getElementById('container');
+    const li=document.createElement('li');
+    li.innerText=`${product} ${quantity}`;
+    container.appendChild(li)
+}
+// local storage thk data pauar jnno.jodi thke taile seta parse kore dibe.noeto empty object dibe
+const getStoredProductFromLocalStorage=()=>{
+    let cart={};
+    const savedCart=localStorage.getItem('cart');
+    if(savedCart){
+        cart=JSON.parse(savedCart);
+    }
+    return cart;
+}
+// local storage new product add korar jnno.stringify kore add korte hbe.
+const saveProductInLocalStorage=(product,quantity)=>{
+const cart=getStoredProductFromLocalStorage();
+cart[product]=quantity;
+const cartStringified=JSON.stringify(cart);
+localStorage.setItem('cart',cartStringified);
+}
+// load korleu jate porduct gulo ul te thke sejnno local storage thk data gulo nia segulo display kora
+const displayProductFromLocalStorage=()=>{
+    const cart=getStoredProductFromLocalStorage();
+    console.log(cart);
+    for(const singleProduct in cart){
+        const quantity=cart[singleProduct];
+        console.log(singleProduct,quantity);
+        showProduct(singleProduct,quantity);
+    }
+}
+displayProductFromLocalStorage();
+
+
+**interview qn: IMAGE-2
+
+
+**Example-1: initially count 0 thkbe.btn e click korle +1 kore barbe. local storage count er new value set hbe.and browser reload dileuhistory thkbe.
+
+html:
+  <p id="pTag">0</p>
+    <button onclick="clickBtn()">click</button>
+
+js:
+let count=0;
+const clickBtn=()=>{
+    count=count+1;
+showValue(count);
+storeDataInLocalStorage('count',count)
+}
+const showValue=(count)=>{
+    const pTag=document.getElementById('pTag');
+    pTag.innerText=count;
+}
+const getDataFromLC=()=>{
+    let cart={};
+    const savedCart=localStorage.getItem('count');
+    if(savedCart){
+        cart=JSON.parse(savedCart);
+    }
+    return cart;
+}
+const storeDataInLocalStorage=(count,value)=>{
+const cart=getDataFromLC();
+console.log(cart);
+cart[count]=value;
+const cartStringified=JSON.stringify(cart);
+localStorage.setItem('count',cartStringified)
+}
+const displayDataFromLocalStorage=()=>{
+    const cart=getDataFromLC();
+    console.log(cart)
+    for(const currentValue in cart){
+        count=cart[currentValue];
+        console.log('count',count);
+        showValue(count);
+    }
+
+}
+displayDataFromLocalStorage()
+
+
+
+
+  
+
+   
